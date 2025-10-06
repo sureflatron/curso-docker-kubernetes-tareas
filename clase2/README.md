@@ -143,7 +143,9 @@ docker run  -p 4000:4000 --name prueba-nur  -d prueba-nur:latest
 ![Container Running](./screenshots/docker.png)
 ![API Response](./screenshots/logs.png)
 
+**LOGIN**
 ``` CURL
+
 curl --request POST \
   --url http://localhost:4000/login \
   --header 'Content-Type: application/json' \
@@ -155,7 +157,48 @@ curl --request POST \
 }'
 ```
 
+**LISTAR**
+``` CURL
+curl --request GET \
+  --url http://localhost:4000/users \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHNwc2dyb3VwLmNvbS5iciIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTc1OTc2NjMyNH0.AO2JspytzDJQyX0QwiVGopdtmJQRWt2Q5-5vNLz553w' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/10.0.0'
+  ```
 
+  **CREAR**
+``` CURL
+  curl --request POST \
+  --url http://localhost:4000/users \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHNwc2dyb3VwLmNvbS5iciIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTc1OTc2NjMyNH0.AO2JspytzDJQyX0QwiVGopdtmJQRWt2Q5-5vNLz553w' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/10.0.0' \
+  --cookie JSESSIONID=44D23F47EB5FCB3086BCF6C875EC3B3A \
+  --data '	{
+		"id": 2,
+		"name": "Fiengo",
+		"email": "fiengo@gmail.com",
+		"type": "user",
+		"password": "Fiengo"
+	}'
+```
+
+
+**MODIFICAR**
+``` CURL
+curl --request PUT \
+  --url http://127.0.0.1:4000/users/2 \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHNwc2dyb3VwLmNvbS5iciIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTc1OTc2NjUwOH0.RbyJo8M9FS73_rRcuZxcYUbAj6WrfNMFfT-jVttwjRI' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/10.0.0' \
+  --data '	{
+		"id": 2,
+		"name": "yandel",
+		"email": "yandel@spsgroup.com.br",
+		"type": "admin",
+		"password": "yandel123"
+	}'
+  ```
 ## Docker Hub
 
 **URL:** https://hub.docker.com/r/sureflatron3/prueba-nur
@@ -170,4 +213,5 @@ curl --request POST \
 
 ## Conclusiones
 
-Aprendí a optimizar imágenes...
+Aprendí a optimizar imágenes.
+Aprendí a subir imagenes a Docker Hub
