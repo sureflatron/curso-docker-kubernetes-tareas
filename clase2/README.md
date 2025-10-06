@@ -135,6 +135,11 @@ What's next:
 ## Testing
 
 ![Docker Images](./screenshots/image.png)
+
+```
+docker run  -p 4000:4000 --name prueba-nur  -d prueba-nur:latest
+```
+
 ![Container Running](./screenshots/docker.png)
 ![API Response](./screenshots/logs.png)
 
