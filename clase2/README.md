@@ -199,6 +199,17 @@ curl --request PUT \
 		"password": "yandel123"
 	}'
   ```
+
+
+  **ELIMINAR**
+``` CURL
+curl --request DELETE \
+  --url http://127.0.0.1:4000/users/2 \
+  --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHNwc2dyb3VwLmNvbS5iciIsInR5cGUiOiJhZG1pbiIsImlhdCI6MTc1OTc3MDk4N30.ZclGry3Bc2o7cjm_FdBZq3Sely4fvHZq-3JllRD3Bgo' \
+  --header 'Content-Type: application/json' \
+  --header 'User-Agent: insomnia/10.0.0'
+  ```
+  
 ## Docker Hub
 
 **URL:** https://hub.docker.com/r/sureflatron3/prueba-nur

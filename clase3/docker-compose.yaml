@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Servicio Web - Nginx
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx:/usr/share/nginx/html
+    networks:
+      - app-network
+    depends_on:
+      - database
+
+  # Base de datos - PostgreSQL
+  database:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  # GUI para PostgreSQL (opcional pero recomendado)
+  adminer:
+    image: adminer
+    ports:
+      - "8081:8080"
+    networks:
+      - app-network
+    depends_on:
+      - database
+
+# Red custom
+networks:
+  app-network:
+    driver: bridge
+
+# Volumen para persistencia
+volumes:
+  db-data:
