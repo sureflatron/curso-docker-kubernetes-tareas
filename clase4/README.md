@@ -157,7 +157,7 @@ curl -I http://localhost:8080/
 
 - `docker compose ps`
 - ![Docker Images](./screenshots/ps.png)
-- 
+
 - Logs con conexión a Redis y DB
   ![Docker Images](./screenshots/logs.png)
 
@@ -171,7 +171,7 @@ curl -I http://localhost:8080/
 ![Docker Images](./screenshots/redis.png)
   
 - MongoDB Copass
-- ![Docker Images](./screenshots/mongodb.png)  
+![Docker Images](./screenshots/mongodb.png)  
 ---
 
 ## ✅ Checklist
