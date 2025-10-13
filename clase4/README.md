@@ -1,6 +1,8 @@
-# docker-microservicios-clase4
+# 📦 Aplicación Microservicios con Cache y Gateway
 
-Aplicación de **microservicios** con **API Gateway (Nginx)**, **Backend Node.js**,
+**Curso:** Docker & Kubernetes - Clase 4
+**Estudiante:** Miguel Claure Villca
+**Descripción:** Aplicación de **microservicios** con **API Gateway (Nginx)**, **Backend Node.js**,
 **Redis como cache**, **MongoDB** como base de datos y **Frontend** estático.
 
 ## 🧠 Objetivo
@@ -53,8 +55,10 @@ Red: `appnet` (bridge). Volumen: `mongo_data` (persistencia).
 
 ```bash
 # Clonar repositorio
-git clone <tu-repo> docker-microservicios-clase4
-cd docker-microservicios-clase4
+git clone https://github.com/sureflatron/curso-docker-kubernetes-tareas.git
+
+#Ingreasar a la tarea
+cd curso-docker-kubernetes-tareas/clase4
 
 # Levantar servicios
 docker compose up -d --build
@@ -147,20 +151,33 @@ curl -I http://localhost:8080/
 
 ---
 
-## 🖼️ Capturas de Pantalla (colócalas en `docs/screenshots/`)
+## 🖼️ Capturas de Pantalla
 - Frontend funcionando
-- `docker compose ps`
-- Logs con conexión a Redis y DB
-- Respuesta con `"source":"cache"`
-- Respuesta con `"source":"database"`
+  ![Docker Images](./screenshots/front-end.png)
 
+- `docker compose ps`
+- ![Docker Images](./screenshots/ps.png)
+- 
+- Logs con conexión a Redis y DB
+  ![Docker Images](./screenshots/logs.png)
+
+- Respuesta con `"source":"cache"`
+![Docker Images](./screenshots/cache.png)
+
+- Respuesta con `"source":"database"`
+  ![Docker Images](./screenshots/database.png)
+
+- Redis Insight
+![Docker Images](./screenshots/redis.png)
+  
+- MongoDB Copass
+- ![Docker Images](./screenshots/mongodb.png)  
 ---
 
-## ✅ Checklist antes de entregar
+## ✅ Checklist
 - [ ] `docker compose up -d` sin errores
 - [ ] Frontend accesible en `http://localhost:8080`
 - [ ] APIs responden OK
 - [ ] Cache HIT/MISS visible en logs
 - [ ] Datos persisten tras reinicio
-- [ ] README completo y claro
-- [ ] Screenshots en `docs/screenshots/`
+- [ ] Screenshots en `./screenshots/`
