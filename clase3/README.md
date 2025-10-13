@@ -1,7 +1,7 @@
 # 📦 Aplicación Multi-Contenedor con Docker Compose
 
 **Curso:** Docker & Kubernetes - Clase 3  
-**Estudiante:** Miguel Claure Villca 
+**Estudiante:** Miguel Claure Villca
 **Descripción:** Aplicación demostrativa con Nginx, PostgreSQL y Adminer orquestada con Docker Compose, implementando redes custom y volúmenes persistentes.
 
 ## 🛠 Stack Tecnológico

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blog Microservicios</title>
+  <style>
+    body { font-family: system-ui, Arial, sans-serif; max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    header { display: flex; align-items: center; justify-content: space-between; }
+    .status { font-size: 0.9rem; }
+    form { margin: 1rem 0; display: grid; gap: .5rem; }
+    input, textarea { width: 100%; padding: .6rem; }
+    button { padding: .6rem 1rem; cursor: pointer; }
+    .post { border: 1px solid #ddd; padding: 1rem; margin: 1rem 0; border-radius: .5rem; }
+    .muted { color: #666; font-size: .9rem; }
+    code { background: #f6f6f6; padding: 2px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧩 Blog con Cache + Gateway</h1>
+    <div class="status">
+      Gateway: <code id="gw">...</code> · API: <code id="api">...</code>
+    </div>
+  </header>
+
+  <section>
+    <h2>Crear Post</h2>
+    <form id="form">
+      <input id="title" placeholder="Título" required />
+      <textarea id="content" placeholder="Contenido" rows="4" required></textarea>
+      <button>Guardar</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Posts</h2>
+    <button id="refresh">Refrescar</button>
+    <div id="meta" class="muted"></div>
+    <div id="posts"></div>
+  </section>
+
+  <script>
+    const apiBase = '/api';
+
+    async function ping() {
+      const gw = await fetch('/gateway/health').then(r => r.ok ? 'ok' : 'down').catch(()=> 'down');
+      const api = await fetch(apiBase + '/health').then(r => r.ok ? 'ok' : 'down').catch(()=> 'down');
+      document.getElementById('gw').textContent = gw;
+      document.getElementById('api').textContent = api;
+    }
+
+    async function load() {
+      const res = await fetch(apiBase + '/posts');
+      const json = await res.json();
+      document.getElementById('meta').textContent = 'source: ' + (json.source || '?');
+      const container = document.getElementById('posts');
+      container.innerHTML = '';
+      (json.data || []).forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'post';
+        el.innerHTML = '<h3>'+p.title+'</h3><p>'+p.content+'</p><div class="muted">'+(new Date(p.createdAt)).toLocaleString()+'</div>';
+        container.appendChild(el);
+      });
+    }
+
+    document.getElementById('refresh').addEventListener('click', load);
+
+    document.getElementById('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('title').value.trim();
+      const content = document.getElementById('content').value.trim();
+      if (!title || !content) return;
+      const res = await fetch(apiBase + '/posts', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ title, content })
+      });
+      if (res.ok) {
+        document.getElementById('title').value = '';
+        document.getElementById('content').value = '';
+        await load(); // debería venir de DB (cache invalidado)
+      } else {
+        alert('Error al crear post');
+      }
+    });
+
+    // Auto seed si está vacío (solo para demo rápida)
+    (async () => {
+      try {
+        const r = await fetch(apiBase + '/posts');
+        const j = await r.json();
+        if (!j.data || j.data.length === 0) {
+          await fetch(apiBase + '/seed', { method: 'POST' });
+        }
+      } catch(e) {}
+      await ping();
+      await load();
+    })();
+  </script>
+</body>
+</html>

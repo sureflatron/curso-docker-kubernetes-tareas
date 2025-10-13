@@ -1,0 +1,16 @@
+{
+  "name": "posts-api",
+  "version": "1.0.0",
+  "description": "Microservicio de Posts con Redis cache y MongoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1",
+    "mongoose": "^8.5.2",
+    "morgan": "^1.10.0",
+    "cors": "^2.8.5"
+  }
+}
