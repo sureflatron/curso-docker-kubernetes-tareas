@@ -8,6 +8,16 @@
    - Backend v2.1: https://hub.docker.com/repository/docker/sureflatron3/springboot-api/general
    - Frontend v2.2: https://hub.docker.com/repository/docker/sureflatron3/angular-frontend/general
 
+## Descarga
+```bash
+# Clonar repositorio
+git clone https://github.com/sureflatron/curso-docker-kubernetes-tareas.git
+
+#Ingreasar a la tarea
+cd curso-docker-kubernetes-tareas/proyecto_final
+
+```
+
    ## Parte 1: Setup del Ambiente
 
    **Ambiente utilizado:**
@@ -74,6 +84,7 @@
    <!--  revisar-->
    ![Rollout](screenshots/parte2-rollot-status.png) 
    ![Pods](screenshots/parte2-get-pods.png)
+   ![Curl](screenshots/parte2-curl.png)
 
    ![Docker build](screenshots/parte8-descripcion.png)
    ![Rollout](screenshots/parte9-descripcion.png)
@@ -120,8 +131,19 @@
 
    ### Screenshots Front-End
    ![Frontend build](screenshots/parte11-descripcion.png)
-   ![Frontend UI](screenshots/parte12-descripcion.png)
-   ![System info display](screenshots/parte13-descripcion.png)
+
+   ![Frontend Html](screenshots/parte3-html.png)
+   ![Frontend ts](screenshots/parte3-ts.png)
+   https://hub.docker.com/r/sureflatron3/angular-frontend
+   ![Frontend DockerHub](screenshots/parte3-dockerhub.png)
+   <!-- revisar -->
+   ![Frontend DockerHub](screenshots/parte3-rollout.png)
+   ![Frontend UI](screenshots/parte3-boton.png)
+   ![System info display](screenshots/parte3-info.png)
+
+
+  
+  
    ### Screenshots Kong (solo para local con docker)
 
    ![Services config](screenshots/parte14-descripcion.png)
@@ -134,16 +156,33 @@ Cada vez que aplico un cambio en la aplicación (por ejemplo, cambias la imagen 
 Si esa versión presenta errores, este comando permite volver de forma segura a la versión anterior sin necesidad de eliminar recursos o interrumpir el servicio.
 
    ### Screenshots
-   ![Rollback](screenshots/parte4-rollback.png)
-   ![Rollforward](screenshots/parte4-rollforward.png)
+   Backend
+   ![History](screenshots/parte4-history-backend.png)
+   ![Rollback](screenshots/parte4-rollout.png)
+   ![NoFound](screenshots/parte4-curl-notfound.png)
+   ![Rollforward](screenshots/parte4-revision.png)
+   ![Ok](screenshots/parte4-curl-ok.png)
 
+   Frontend
+   ![History](screenshots/parte4-history-frontend.png)
+   ![History](screenshots/parte4-rollout-frontend.png)
+   ![Rollforward](screenshots/parte4-rollforwardfrontend.png)
    ## Parte 5: Ingress + MetalLB
 
    **IP del Ingress:** (http://192.168.0.180/)
 
    ### Screenshots
+
+   ![Ingress](screenshots/parte5-ingress.png)
+   ![Describe](screenshots/parte5-describe.png)
+   ![Acceso externo](screenshots/parte5-acceso.png)
+   ![Curl](screenshots/parte5-curl.png)
+   ![Health](screenshots/parte5-health.png)
+    ![IP](screenshots/parte5-metal.png)
+
    ![Ingress config](screenshots/parte16-descripcion.png)
-   ![Acceso externo](screenshots/parte7-descripcion.png)
+ 
+   
 
    ## Conclusiones
 
