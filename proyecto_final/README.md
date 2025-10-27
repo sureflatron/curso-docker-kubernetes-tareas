@@ -27,25 +27,25 @@ cd curso-docker-kubernetes-tareas/proyecto_final
    - Recursos: 8GB RAM, 4 CPU cores
    - Red configurada: Bridged
    - Rango MetalLB: 192.168.0.180 - 192.168.0.190
-   ![neofetch](screenshots/neofetch.png)
+   ![neofetch](./screenshots/neofetch.png)
    
    **Master:** yandel
-   ![microk8s status](screenshots/parte1-descripcion.png.jpg)
+   ![microk8s status](./screenshots/parte1-descripcion.png)
    
    **Worker:** wisin
-    ![microk8s status](screenshots/parte2-descripcion.png.jpg)
+    ![microk8s status](./screenshots/parte2-descripcion.png)
 
    **LENS:**
-   ![metricas](screenshots/parte3-descripcion.png)
-   ![nodos](screenshots/parte4-descripcion.png)
+   ![metricas](./screenshots/parte3-descripcion.png)
+   ![nodos](./screenshots/parte4-descripcion.png)
 
-   ### Screenshots
+   ### ./screenshots
    
-   ![microk8s status](screenshots/parte5-descripcion.png)
-   ![Pods running](screenshots/parte6-descripcion.png)
-   ![Frontend via MetalLB](screenshots/parte7-descripcion.png)
-   ![Virtual Box Master](screenshots/parte1-vmmaster.png.jpg)
-   ![irtual Box Worker](screenshots/parte1-vmworker.png.jpg)
+   ![microk8s status](./screenshots/parte5-descripcion.png)
+   ![Pods running](./screenshots/parte6-descripcion.png)
+   ![Frontend via MetalLB](./screenshots/parte7-descripcion.png)
+   ![Virtual Box Master](./screenshots/parte1-vmmaster.png)
+   ![irtual Box Worker](./screenshots/parte1-vmworker.png)
 
    ## Parte 2: Backend v2.1
 
@@ -76,20 +76,20 @@ cd curso-docker-kubernetes-tareas/proyecto_final
     }
    ```
 
-   ### Screenshots
+   ### ./screenshots
 
-   ![JAVA](screenshots/parte2-java.png)
-   ![Images](screenshots/parte2-images-java.png)
+   ![JAVA](./screenshots/parte2-java.png)
+   ![Images](./screenshots/parte2-images-java.png)
    https://hub.docker.com/r/sureflatron3/springboot-api
-   ![Images](screenshots/parte2-dockerhub.png)
+   ![Images](./screenshots/parte2-dockerhub.png)
    <!--  revisar-->
-   ![Rollout](screenshots/parte2-rollot-status.png) 
-   ![Pods](screenshots/parte2-get-pods.png)
-   ![Curl](screenshots/parte2-curl.png)
+   ![Rollout](./screenshots/parte2-rollot-status.png) 
+   ![Pods](./screenshots/parte2-get-pods.png)
+   ![Curl](./screenshots/parte2-curl.png)
 
-   ![Docker build](screenshots/parte8-descripcion.png)
-   ![Rollout](screenshots/parte9-descripcion.png)
-   ![API Info](screenshots/parte10-descripcion.png)
+   ![Docker build](./screenshots/parte8-descripcion.png)
+   ![Rollout](./screenshots/parte9-descripcion.png)
+   ![API Info](./screenshots/parte10-descripcion.png)
 
    ## Parte 3: Frontend v2.2
    Se adciono el consumo al metodo /api/info:
@@ -130,25 +130,25 @@ cd curso-docker-kubernetes-tareas/proyecto_final
    </div>
    ```
 
-   ### Screenshots Front-End
-   ![Frontend build](screenshots/parte11-descripcion.png)
+   ### ./screenshots Front-End
+   ![Frontend build](./screenshots/parte11-descripcion.png)
 
-   ![Frontend Html](screenshots/parte3-html.png)
-   ![Frontend ts](screenshots/parte3-ts.png)
+   ![Frontend Html](./screenshots/parte3-html.png)
+   ![Frontend ts](./screenshots/parte3-ts.png)
    https://hub.docker.com/r/sureflatron3/angular-frontend
-   ![Frontend DockerHub](screenshots/parte3-dockerhub.png)
+   ![Frontend DockerHub](./screenshots/parte3-dockerhub.png)
    <!-- revisar -->
-   ![Frontend DockerHub](screenshots/parte3-rollout.png)
-   ![Frontend UI](screenshots/parte3-boton.png)
-   ![System info display](screenshots/parte3-info.png)
+   ![Frontend DockerHub](./screenshots/parte3-rollout.png)
+   ![Frontend UI](./screenshots/parte3-boton.png)
+   ![System info display](./screenshots/parte3-info.png)
 
 
   
   
-   ### Screenshots Kong (solo para local con docker)
+   ### ./screenshots Kong (solo para local con docker)
 
-   ![Services config](screenshots/parte14-descripcion.png)
-   ![Route config](screenshots/parte15-descripcion.png)
+   ![Services config](./screenshots/parte14-descripcion.png)
+   ![Route config](./screenshots/parte15-descripcion.png)
    ## Parte 4: Gestión de Versiones
 
    ### ¿Qué hace kubectl rollout undo?
@@ -156,32 +156,32 @@ cd curso-docker-kubernetes-tareas/proyecto_final
 Cada vez que aplico un cambio en la aplicación (por ejemplo, cambias la imagen Docker), Kubernetes crea una nueva revisión (revision) del deployment.
 Si esa versión presenta errores, este comando permite volver de forma segura a la versión anterior sin necesidad de eliminar recursos o interrumpir el servicio.
 
-   ### Screenshots
+   ### ./screenshots
    Backend
-   ![History](screenshots/parte4-history-backend.png)
-   ![Rollback](screenshots/parte4-rollout.png)
-   ![NoFound](screenshots/parte4-curl-notfound.png)
-   ![Rollforward](screenshots/parte4-revision.png)
-   ![Ok](screenshots/parte4-curl-ok.png)
+   ![History](./screenshots/parte4-history-backend.png)
+   ![Rollback](./screenshots/parte4-rollout.png)
+   ![NoFound](./screenshots/parte4-curl-notfound.png)
+   ![Rollforward](./screenshots/parte4-revision.png)
+   ![Ok](./screenshots/parte4-curl-ok.png)
 
    Frontend
-   ![History](screenshots/parte4-history-frontend.png)
-   ![History](screenshots/parte4-rollout-frontend.png)
-   ![Rollforward](screenshots/parte4-rollforwardfrontend.png)
+   ![History](./screenshots/parte4-history-frontend.png)
+   ![History](./screenshots/parte4-rollout-frontend.png)
+   ![Rollforward](./screenshots/parte4-rollforwardfrontend.png)
    ## Parte 5: Ingress + MetalLB
 
    **IP del Ingress:** (http://192.168.0.180/)
 
-   ### Screenshots
+   ### ./screenshots
 
-   ![Ingress](screenshots/parte5-ingress.png)
-   ![Describe](screenshots/parte5-describe.png)
-   ![Acceso externo](screenshots/parte5-acceso.png)
-   ![Curl](screenshots/parte5-curl.png)
-   ![Health](screenshots/parte5-health.png)
-    ![IP](screenshots/parte5-metal.png)
+   ![Ingress](./screenshots/parte5-ingress.png)
+   ![Describe](./screenshots/parte5-describe.png)
+   ![Acceso externo](./screenshots/parte5-acceso.png)
+   ![Curl](./screenshots/parte5-curl.png)
+   ![Health](./screenshots/parte5-health.png)
+    ![IP](./screenshots/parte5-metal.png)
 
-   ![Ingress config](screenshots/parte16-descripcion.png)
+   ![Ingress config](./screenshots/parte16-descripcion.png)
  
    
 
