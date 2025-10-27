@@ -1,7 +1,9 @@
 # Proyecto Final - Docker & Kubernetes
 
    **Alumno:** Miguel Claure Villca
+   
    **Fecha:** 26/10/2025
+   
    **Curso:** Docker & Kubernetes - i-Quattro
 
    ## Links de Docker Hub
