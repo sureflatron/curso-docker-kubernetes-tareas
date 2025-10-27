@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-config
+  namespace: proyecto-integrador
+  labels:
+    app: frontend
+    tier: presentation
+    version: v2.0
+data:
+  # API Backend URL para el BFF (nginx proxy)
+  # Usa DNS interno de Kubernetes para comunicarse con el backend
+  API_BACKEND_URL: "http://api-service.proyecto-integrador.svc.cluster.local:8080"

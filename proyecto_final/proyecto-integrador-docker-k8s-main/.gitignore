@@ -1,0 +1,81 @@
+# ====================
+# Java / Maven / Spring Boot
+# ====================
+HELP.md
+GIT_SETUP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# ====================
+# Node / Angular
+# ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+
+# Angular
+frontend/dist/
+frontend/.angular/
+frontend/.angular-cache/
+
+# ====================
+# IDEs
+# ====================
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# ====================
+# OS
+# ====================
+### macOS ###
+.DS_Store
+
+### Windows ###
+Thumbs.db
+desktop.ini
+
+### Linux ###
+*~
+
+# ====================
+# Docker
+# ====================
+.env.local
+.env.*.local
+
+# ====================
+# Logs
+# ====================
+logs/
+*.log

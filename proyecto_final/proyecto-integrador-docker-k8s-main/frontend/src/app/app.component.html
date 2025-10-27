@@ -1,0 +1,137 @@
+<div class="container">
+  <h1>{{ title }}</h1>
+
+  <!-- Información del sistema -->
+  <div class="card info-section">
+    <h3>Stack Tecnológico</h3>
+    <p>
+      Esta aplicación demuestra una arquitectura de microservicios completa:
+    </p>
+    <ul>
+      <li><strong>Frontend:</strong> Angular 17+ con patrón BFF (nginx proxy)</li>
+      <li><strong>Backend:</strong> Spring Boot 3.5.6 con REST API</li>
+      <li><strong>Cache:</strong> Redis 7 para optimizar consultas</li>
+      <li><strong>Base de datos:</strong> PostgreSQL 15 con persistencia</li>
+    </ul>
+
+    <div style="margin-top: 20px; padding: 15px; background-color: rgba(255,255,255,0.05); border-radius: 8px;">
+      <p style="margin: 0 0 10px 0;"><strong>📚 Documentación de Arquitectura:</strong></p>
+      <ul style="margin: 0; padding-left: 20px;">
+        <li>
+          <a href="https://github.com/alefiengo/proyecto-integrador-docker-k8s/blob/main/ARCHITECTURE.md#arquitectura-docker-compose-v12"
+             target="_blank"
+             style="color: #4fc3f7; text-decoration: none;">
+            Docker Compose v1.2 (Kong Gateway)
+          </a>
+        </li>
+        <li>
+          <a href="https://github.com/alefiengo/proyecto-integrador-docker-k8s/blob/main/ARCHITECTURE.md#arquitectura-kubernetes-v20"
+             target="_blank"
+             style="color: #4fc3f7; text-decoration: none;">
+          </a>
+
+
+            Kubernetes v2.0 (Ingress, HPA, StatefulSets)
+        </li>
+        <div class="form-group">
+  <button (click)="getSystemInfo()" class="btn-primary">
+    Ver Info del Sistema
+  </button>
+</div>
+
+<div *ngIf="systemInfo" class="card info-section">
+  <h3>Información del Sistema</h3>
+  <p><strong>Alumno:</strong> {{ systemInfo.alumno }}</p>
+  <p><strong>Versión:</strong> {{ systemInfo.version }}</p>
+  <p><strong>Curso:</strong> {{ systemInfo.curso }}</p>
+  <p><strong>Timestamp:</strong> {{ systemInfo.timestamp }}</p>
+  <p><strong>Pod:</strong> {{ systemInfo.hostname }}</p>
+</div>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Mensajes -->
+  <div *ngIf="error" class="error">
+    {{ error }}
+    <button class="btn btn-danger" (click)="clearMessages()" style="float: right; padding: 5px 10px;">✕</button>
+  </div>
+
+  <div *ngIf="success" class="success">
+    {{ success }}
+  </div>
+
+  <!-- Formulario -->
+  <div class="card">
+    <h2>Crear nuevo usuario</h2>
+    <form class="user-form" (ngSubmit)="createUser()">
+      <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input
+          type="text"
+          id="nombre"
+          [(ngModel)]="newUser.nombre"
+          name="nombre"
+          placeholder="Ingresa el nombre"
+          required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input
+          type="email"
+          id="email"
+          [(ngModel)]="newUser.email"
+          name="email"
+          placeholder="usuario@ejemplo.com"
+          required>
+      </div>
+
+      <div style="grid-column: 1 / -1;">
+        <button type="submit" class="btn" [disabled]="loading">
+          {{ loading ? 'Creando...' : 'Crear Usuario' }}
+        </button>
+        <button type="button" class="btn" (click)="loadUsers()" [disabled]="loading">
+          Recargar Lista
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Lista de usuarios -->
+  <div class="card">
+    <h2>Usuarios registrados ({{ users.length }})</h2>
+
+    <div *ngIf="loading" class="loading">
+      Cargando usuarios...
+    </div>
+
+    <div class="users-list" *ngIf="!loading">
+      <div *ngIf="users.length === 0" style="text-align: center; padding: 20px; color: #999;">
+        No hay usuarios registrados. Crea el primero arriba.
+      </div>
+
+      <div *ngFor="let user of users" class="user-item">
+        <div class="user-info">
+          <strong>#{{ user.id }}</strong>
+          <span>{{ user.nombre }}</span>
+          <span style="color: #666; margin-left: 15px;">{{ user.email }}</span>
+        </div>
+        <div class="user-actions">
+          <button class="btn btn-danger" (click)="deleteUser(user.id!)" [disabled]="loading">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align: center; color: white; margin-top: 30px; padding: 20px;">
+    <p>Proyecto Integrador {{ version }} - Curso Docker & Kubernetes</p>
+    <p style="font-size: 14px; opacity: 0.8;">
+      <strong>Entorno:</strong> {{ environment }} |
+      <strong>Autor:</strong> <a href="https://alefiengo.dev" target="_blank" style="color: #4fc3f7; text-decoration: none;">alefiengo.dev</a>
+    </p>
+  </div>
+</div>
