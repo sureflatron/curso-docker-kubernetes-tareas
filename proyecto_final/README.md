@@ -27,6 +27,7 @@ cd curso-docker-kubernetes-tareas/proyecto_final
    - Recursos: 8GB RAM, 4 CPU cores
    - Red configurada: Bridged
    - Rango MetalLB: 192.168.0.180 - 192.168.0.190
+   ![neofetch](screenshots/neofetch.png)
    
    **Master:** yandel
    ![microk8s status](screenshots/parte1-descripcion.png.jpg)
