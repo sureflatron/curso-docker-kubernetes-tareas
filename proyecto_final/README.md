@@ -204,15 +204,3 @@ Comunicación Frontend–Backend: las peticiones a /api fallaban debido a una fa
 Este proyecto me ayudó a comprender cómo funcionan los entornos contenedorizados y orquestados en la práctica.
 En un proyecto real, aplicaría estos conocimientos para automatizar despliegues en entornos de producción, manteniendo versiones seguras, escalables y fáciles de revertir.
 Además, la experiencia de usar microk8s me mostró cómo se puede simular un entorno cloud real dentro de un entorno local, ideal para pruebas y CI/CD.
-   ```
-
-1. **Directorio screenshots/**
-   - Crear directorio `screenshots/` en la raíz
-   - Guardar TODOS los screenshots ahí
-   - Nombrarlos siguiendo el patrón: `parteX-descripcion.png`
-
-2. **Tags de Git**
-   ```bash
-   git tag -a v2.1 -m "Backend v2.1 con endpoint /api/info"
-   git tag -a v2.2 -m "Frontend v2.2 con integración de /api/info"
-   git push origin main --tags
