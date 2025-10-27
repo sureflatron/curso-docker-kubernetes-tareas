@@ -1,0 +1,195 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: proyecto-integrador
+  labels:
+    app: api
+    tier: backend
+    version: v2.0
+spec:
+  replicas: 2  # Mínimo para HPA
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+        tier: backend
+        version: v2.0
+    spec:
+      # Esperar a que PostgreSQL esté listo antes de iniciar
+      initContainers:
+      - name: wait-for-postgres
+        image: busybox:1.36
+        command:
+        - sh
+        - -c
+        - |
+          echo "Esperando a que PostgreSQL esté listo..."
+          until nc -z postgres-0.postgres-headless 5432; do
+            echo "PostgreSQL no está listo, esperando..."
+            sleep 2
+          done
+          echo "PostgreSQL está listo!"
+
+      - name: wait-for-redis
+        image: busybox:1.36
+        command:
+        - sh
+        - -c
+        - |
+          echo "Esperando a que Redis esté listo..."
+          until nc -z redis-service 6379; do
+            echo "Redis no está listo, esperando..."
+            sleep 2
+          done
+          echo "Redis está listo!"
+
+      containers:
+      - name: api
+        image: alefiengo/springboot-api:v2.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+
+        env:
+        # Database configuration desde ConfigMap
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: DB_HOST
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: DB_PORT
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: DB_NAME
+
+        # Database credentials desde Secret
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_USER
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
+
+        # JDBC URL completa desde ConfigMap
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: SPRING_DATASOURCE_URL
+
+        # Redis configuration desde ConfigMap
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: REDIS_PORT
+
+        # Spring Boot configuration desde ConfigMap
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: SPRING_PROFILES_ACTIVE
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: SERVER_PORT
+        - name: LOGGING_LEVEL_ROOT
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: LOGGING_LEVEL_ROOT
+        - name: LOGGING_LEVEL_DEV_ALEFIENGO
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: LOGGING_LEVEL_DEV_ALEFIENGO
+
+        # Actuator configuration desde ConfigMap
+        - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+        - name: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED
+        - name: MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED
+        - name: MANAGEMENT_HEALTH_READINESSSTATE_ENABLED
+          valueFrom:
+            configMapKeyRef:
+              name: api-config
+              key: MANAGEMENT_HEALTH_READINESSSTATE_ENABLED
+
+        # Health probes usando endpoints específicos de Spring Boot Actuator
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+
+        startupProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 30  # 30 * 10s = 5 minutos máximo
+
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "200m"  # HPA calculará % sobre este valor
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false  # Spring Boot necesita escribir temp files
+          capabilities:
+            drop:
+            - ALL

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: proyecto-integrador
+  labels:
+    app: api
+    tier: backend
+    version: v2.0
+data:
+  # Database configuration
+  DB_HOST: "postgres-0.postgres-headless"
+  DB_PORT: "5432"
+  DB_NAME: "apidb"
+
+  # JDBC URL completa (sin interpolación de variables)
+  SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres-0.postgres-headless:5432/apidb"
+
+  # Redis configuration
+  REDIS_HOST: "redis-service"
+  REDIS_PORT: "6379"
+
+  # Spring Boot configuration
+  SPRING_PROFILES_ACTIVE: "prod"
+  SERVER_PORT: "8080"
+
+  # Logging levels
+  LOGGING_LEVEL_ROOT: "INFO"
+  LOGGING_LEVEL_DEV_ALEFIENGO: "DEBUG"
+
+  # Actuator configuration (para health probes mejorados y Prometheus)
+  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: "health,info,prometheus"
+  MANAGEMENT_ENDPOINT_HEALTH_PROBES_ENABLED: "true"
+  MANAGEMENT_HEALTH_LIVENESSSTATE_ENABLED: "true"
+  MANAGEMENT_HEALTH_READINESSSTATE_ENABLED: "true"
